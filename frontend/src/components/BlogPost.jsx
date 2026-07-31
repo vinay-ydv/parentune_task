@@ -7,7 +7,7 @@ import doctorIcon  from '../assets/Vector (1).png';
 import parentsIcon from '../assets/Shape.png';
 import infographicImg from '../assets/image 1.png';
 
-const API_URL = '/api/blog/blogs/v4/blog?itemId=11144';
+const API_URL = 'https://qa7.parentune.com/api/blog/blogs/v4/blog?itemId=11144';
 const HEADERS = {
   'accept': 'application/json',
   'accept-language': 'en-US,en;q=0.9',
@@ -15,7 +15,7 @@ const HEADERS = {
   'guestuid': '8903d41a83f5a70e92a27f62755631f8',
 };
 
-// Formats "Thu, 21 May 2026 09:24:12 GMT" → "21/05/26"
+
 const formatDate = (dateString) => {
   if (!dateString) return '';
   const date = new Date(dateString);
@@ -63,7 +63,7 @@ const BlogPost = () => {
   if (error) return <BlogError message={error} />;
   if (!blog) return null;
 
-  // ── Map real API fields ──────────────────────────────────────────
+
   const title       = blog.title || '';
   const content     = blog.description || '';
   const excerpt     = blog.summary || '';
@@ -77,13 +77,13 @@ const BlogPost = () => {
   const views       = blog.viewsCount || '';
   const timeAgo     = blog.time || '';
 
-  // Reviewer — fallback when API returns empty object
+  
   const hasReviewer = blog.reviewedBy && Object.keys(blog.reviewedBy).length > 0;
   const reviewerName   = hasReviewer ? blog.reviewedBy.name          : 'Janaradhan Reddy';
   const reviewerAvatar = hasReviewer ? blog.reviewedBy.avatar        : blog.bloggerAvatar;
   const reviewerQual   = hasReviewer ? blog.reviewedBy.qualification : 'Paediatrician MBBS';
 
-  // Tags
+ 
   const tags = Array.isArray(blog.mappedInterests) && blog.mappedInterests.length > 0
     ? blog.mappedInterests
     : [];
@@ -91,7 +91,7 @@ const BlogPost = () => {
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 pb-24">
 
-      {/* ── Top App Bar ── */}
+    
       <header className="flex items-center px-4 py-4 border-b border-gray-100 bg-gray-50 sticky top-0 z-10">
         <button className="p-2 -ml-2 text-gray-600 hover:bg-gray-100 rounded-full transition-colors">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -103,17 +103,17 @@ const BlogPost = () => {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-5">
 
-        {/* ── Breadcrumbs ── */}
+       
         <div className="text-[13px] text-gray-500 font-medium mb-3">
           Home &gt; Blog &gt; Blog Name
         </div>
 
-        {/* ── Title ── */}
+     
         <h2 className="text-[22px] sm:text-2xl font-bold leading-snug text-gray-800 mb-3">
           {title}
         </h2>
 
-        {/* ── Excerpt ── */}
+        
         {excerpt && (
           <div
             className="text-base text-gray-600 leading-relaxed mb-0"
@@ -121,15 +121,15 @@ const BlogPost = () => {
           />
         )}
 
-        {/* ── Meta: Age Group + Views ── */}
+        
         <div className="flex justify-between items-center text-[17px] text-gray-500 mb-5">
           <span>Age Group: {category}</span>
           <span>{views} views</span>
         </div>
 
-        {/* ── Author & Reviewer Cards ── */}
+        
         <div className="flex gap-3 mb-6 overflow-x-auto pb-1 no-scrollbar">
-          {/* Author Card */}
+          
           <div className="flex items-center gap-3.5 border-[1.5px] border-[#e2e4e7] rounded-full py-2.5 pl-2.5 pr-5 bg-white shrink-0">
             {authorAvatar && (
               <img
@@ -150,7 +150,7 @@ const BlogPost = () => {
             </div>
           </div>
 
-          {/* Reviewer Card */}
+         
           <div className="flex items-center gap-3.5 border-[1.5px] border-[#e2e4e7] rounded-full py-2.5 pl-2.5 pr-5 bg-white shrink-0">
             {reviewerAvatar && (
               <img
@@ -172,7 +172,7 @@ const BlogPost = () => {
           </div>
         </div>
 
-        {/* ── Cover Image ── */}
+        
         {coverImage && (
           <div className="w-full aspect-[4/3] sm:aspect-video rounded-xl overflow-hidden mb-3 bg-gray-100 shadow-sm">
             <img
@@ -184,13 +184,13 @@ const BlogPost = () => {
           </div>
         )}
 
-        {/* ── Publish / Updated dates ── */}
+      
         <div className="flex justify-between items-center text-[13px] text-gray-400 font-medium mb-6 px-1">
           <span>Published: {publishedAt}{timeAgo ? ` (${timeAgo})` : ''}</span>
           {updatedAt && <span>Updated: {updatedAt}</span>}
         </div>
 
-        {/* ── Tags ── */}
+        
         {tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-6">
             {tags.map((tag, i) => (
@@ -204,7 +204,7 @@ const BlogPost = () => {
           </div>
         )}
 
-        {/* ── Main Blog Content + In This Article ── */}
+        
         {(() => {
           const splitIndex = content.search(/<p[^>]*>(?:(?!<\/p>).)*handwritten note/i);
           if (splitIndex !== -1) {
@@ -239,7 +239,7 @@ const BlogPost = () => {
 
         <FAQSection faqs={blog.faqs} quickFact={blog.quickFact} />
 
-        {/* ── Recurring Molar Pregnancy Section ── */}
+       
         <div className="mt-7 mb-5">
           <h3 className="text-[17px] font-bold text-[#1A2B35] mb-3 leading-snug">
             What Are The Chances Of Having A Recurring Molar Pregnancy?
@@ -258,7 +258,7 @@ const BlogPost = () => {
           )}
         </div>
 
-        {/* ── Infographic Symptoms Section ── */}
+        
         <div className="mt-7 mb-5">
           <h3 className="text-[17px] font-bold text-[#1A2B35] mb-3 leading-snug">
             Infographic: What Are The Symptoms Of Molar Pregnancy?
@@ -275,13 +275,13 @@ const BlogPost = () => {
           </div>
         </div>
 
-        {/* ── Frequently Asked Questions Accordion ── */}
+        
         <FAQAccordion />
 
-        {/* ── References Section ── */}
+        
         <ReferencesSection references={blog.references} />
 
-        {/* ── Contributor Profile Card ── */}
+       
         <ContributorProfileCard blog={blog} />
 
       </main>
@@ -291,11 +291,11 @@ const BlogPost = () => {
   );
 };
 
-// ── Contributor Profile Card Component ─────────────────────────────
+
 const ContributorProfileCard = ({ blog }) => {
   const [activeTab, setActiveTab] = useState('Reviewer');
 
-  // Author Data from API
+
   const authorData = {
     role: 'Author',
     name: blog?.bloggerName || 'Zahira',
@@ -304,7 +304,7 @@ const ContributorProfileCard = ({ blog }) => {
     bio: blog?.bloggerBio || 'Shreeja holds a postgraduate degree in Chemistry and diploma in Drug Regulatory Affairs from the University of Mumbai. Before joining MomJunction, she worked as a research analyst with a leading multinational pharmaceutical company.',
   };
 
-  // Reviewer Data from API
+  
   const reviewerData = {
     role: 'Reviewer',
     name: blog?.reviewedBy?.name || 'Zahira',
@@ -313,7 +313,7 @@ const ContributorProfileCard = ({ blog }) => {
     bio: blog?.reviewedBy?.bio || 'Shreeja holds a postgraduate degree in Chemistry and diploma in Drug Regulatory Affairs from the University of Mumbai. Before joining MomJunction, she worked as a research analyst with a leading multinational pharmaceutical company.',
   };
 
-  // Editor Data
+  
   const editorData = {
     role: 'Editor',
     name: blog?.editorName || 'Dr. Nida Asif',
@@ -322,7 +322,7 @@ const ContributorProfileCard = ({ blog }) => {
     bio: 'Medical editor and consultant for child health and developmental care, reviewing evidence-based medical articles.',
   };
 
-  // Fact Checker Data
+ 
   const factCheckerData = {
     role: 'Fact Checker',
     name: blog?.factCheckerName || 'Janaradhan Reddy',
@@ -343,7 +343,7 @@ const ContributorProfileCard = ({ blog }) => {
 
   return (
     <div className="bg-[#FFF5F2] rounded-[24px] p-6 my-8 font-sans">
-      {/* Top Tab Pill Bar */}
+    
       <div className="bg-white rounded-full p-1 border border-gray-100/80 flex items-center justify-between mb-6 shadow-sm">
         {tabs.map((tab) => {
           const isActive = activeTab === tab;
@@ -363,7 +363,7 @@ const ContributorProfileCard = ({ blog }) => {
         })}
       </div>
 
-      {/* Contributor Profile Details */}
+     
       <div className="flex items-start gap-3.5 mb-4">
         {current.avatar && (
           <img
@@ -384,32 +384,32 @@ const ContributorProfileCard = ({ blog }) => {
         </div>
       </div>
 
-      {/* Bio Paragraph */}
+    
       <p className="text-[15px] text-gray-700 leading-relaxed mb-5 font-normal">
         {current.bio}
       </p>
 
-      {/* Connect With Me */}
+      
       <div>
         <h5 className="font-bold text-sm text-gray-900 mb-2.5">
           Connect with me
         </h5>
         <div className="flex items-center gap-2.5">
-          {/* Instagram */}
+         
           <a href="#" className="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 flex items-center justify-center text-white shadow-sm hover:opacity-90 transition-opacity">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
             </svg>
           </a>
 
-          {/* Facebook */}
+         
           <a href="#" className="w-8 h-8 rounded-lg bg-[#3b5998] flex items-center justify-center text-white shadow-sm hover:opacity-90 transition-opacity">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
               <path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/>
             </svg>
           </a>
 
-          {/* LinkedIn */}
+         
           <a href="#" className="w-8 h-8 rounded-lg bg-[#0077b5] flex items-center justify-center text-white shadow-sm hover:opacity-90 transition-opacity">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
               <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
@@ -421,7 +421,7 @@ const ContributorProfileCard = ({ blog }) => {
   );
 };
 
-// ── References Section Component ──────────────────────────────────
+
 const FALLBACK_REFERENCES = [
   { text: 'Molar pregnancy;', source: 'Healthdirect' },
   { text: 'Molar pregnancy;', source: 'Miscarriage association' },
@@ -468,7 +468,7 @@ const ReferencesSection = ({ references }) => {
   );
 };
 
-// ── Frequently Asked Questions Accordion ─────────────────────────
+
 const FAQ_ACCORDION_DATA = [
   {
     question: 'Is a partial molar pregnancy considered a miscarriage?',
@@ -530,7 +530,7 @@ const FAQAccordion = () => {
   );
 };
 
-// ── In This Article Component ─────────────────────────────────────
+
 const FALLBACK_IN_ARTICLE = [
   { title: 'Key Pointers' },
   { title: 'What Is A Molar Pregnancy?' },
@@ -564,7 +564,7 @@ const InThisArticle = ({ items }) => {
   );
 };
 
-// ── Bottom Navigation ────────────────────────────────────────────
+
 const NAV_ITEMS = [
   { label: 'Learn',   icon: learnIcon   },
   { label: 'Blog',    icon: blogIcon    },
@@ -597,7 +597,7 @@ const BottomNav = ({ active }) => (
   </nav>
 );
 
-// ── Doctor Q&As Component ────────────────────────────────────────
+
 const QA_CARDS = [
   {
     user: { name: 'Maira Shaikh', category: 'Pregnancy', avatar: 'https://img1.parentune.com/images/avatar/Untitled design (3)14071720102156.png' },
@@ -613,15 +613,15 @@ const DoctorQA = () => {
 
   return (
     <div className="mt-8 mb-4 border-[1.5px] border-dashed border-[#5BC4E0] rounded-2xl bg-[#FFF8EF] p-4">
-      {/* Section title */}
+     
       <h3 className="font-bold text-base text-[#1a2b35] mb-3 leading-snug">
         Doctor Q&amp;As from Parents like you
       </h3>
 
-      {/* Q&A Card */}
+   
       <div className="qa-card p-4 bg-white rounded-xl shadow-sm">
 
-        {/* User row */}
+       
         <div className="flex items-center gap-2.5 mb-3">
           <img
             src={card.user.avatar}
@@ -635,20 +635,20 @@ const DoctorQA = () => {
           </div>
         </div>
 
-        {/* Question */}
+       
         <p className="text-sm text-[#1a2b35] leading-normal mb-3.5 m-0">
           {card.question}
         </p>
 
-        {/* Dashed divider */}
+      
         <hr className="border-0 border-t border-dashed border-gray-300 my-3" />
 
-        {/* Answered By label */}
+       
         <span className="inline-block text-[11px] text-gray-500 font-medium border border-gray-300 rounded-full px-2.5 py-0.5 mb-2.5">
           Answered By
         </span>
 
-        {/* Doctor row */}
+
         <div className="flex items-center gap-2.5 mb-2.5">
           <img
             src={card.doctor.avatar}
@@ -678,7 +678,7 @@ const DoctorQA = () => {
         </p>
       </div>
 
-      {/* Carousel dots */}
+     
       <div className="flex justify-center gap-1.5 my-3.5">
         {QA_CARDS.map((_, i) => (
           <button
@@ -691,7 +691,7 @@ const DoctorQA = () => {
         ))}
       </div>
 
-      {/* Ask Now button */}
+     
       <button className="block w-full bg-[#1f4b5e] hover:bg-[#163545] text-white font-bold text-sm tracking-wider border-0 rounded-full py-3.5 cursor-pointer transition-colors duration-200 uppercase">
         ASK NOW
       </button>
@@ -699,7 +699,7 @@ const DoctorQA = () => {
   );
 };
 
-// ── FAQ Section Component ─────────────────────────────────────────
+
 const FALLBACK_FAQS = [
   {
     question: 'Can you prevent Meningococcal meningitis?',
@@ -722,11 +722,11 @@ const FAQSection = ({ faqs, quickFact }) => {
           <h3 className={`font-bold text-[15px] text-[#1a2b35] mb-2.5 ${i === 0 ? 'mt-0' : 'mt-6'}`}>
             {item.question}
           </h3>
-          {/* Answer */}
+          
           <p className="text-[15px] text-gray-700 leading-relaxed mb-2">
             {item.answer}
           </p>
-          {/* Embed Quick Fact after first item */}
+          
           {i === 0 && <QuickFact fact={quickFact} />}
         </div>
       ))}
@@ -734,7 +734,7 @@ const FAQSection = ({ faqs, quickFact }) => {
   );
 };
 
-// ── Quick Fact Component ─────────────────────────────────────────
+
 const QuickFact = ({ fact }) => {
   const text = fact ||
     'Fortunately, yes, some forms of bacterial and viral meningitis are preventable through vaccination.';
@@ -743,10 +743,10 @@ const QuickFact = ({ fact }) => {
     <div className="flex items-center my-7 relative w-full font-sans">
       <div className="flex items-center relative w-full">
         
-        {/* Overlapping Triangles Badge on Left */}
+      
         <div className="relative w-[150px] h-[130px] shrink-0 z-20 flex items-center">
           
-          {/* Custom SVG Lightbulb */}
+         
           <div className="absolute top-0 left-3 z-40 -rotate-12">
             <svg width="34" height="42" viewBox="0 0 34 42" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M17 0C7.611 0 0 7.611 0 17C0 22.186 2.502 26.837 6.333 29.8V33C6.333 34.657 7.676 36 9.333 36H24.667C26.324 36 27.667 34.657 27.667 33V29.8C31.498 26.837 34 22.186 34 17C34 7.611 26.389 0 17 0Z" fill="#F4C744"/>
@@ -756,7 +756,7 @@ const QuickFact = ({ fact }) => {
             </svg>
           </div>
 
-          {/* Background and Foreground Triangles */}
+         
           <svg
             width="150"
             height="110"
@@ -765,7 +765,7 @@ const QuickFact = ({ fact }) => {
             xmlns="http://www.w3.org/2000/svg"
             className="overflow-visible absolute top-[10px]"
           >
-            {/* Back Triangle */}
+           
             <path
               d="M 28 48 L 108 14 C 120 9 128 17 123 29 L 93 93 C 88 104 73 106 63 96 L 16 66 C 6 56 13 43 28 48 Z"
               fill="#FFFCF5"
@@ -783,7 +783,7 @@ const QuickFact = ({ fact }) => {
             />
           </svg>
 
-          {/* QUICK FACT Text inside Front Triangle */}
+         
           <div className="absolute left-[30px] top-[40px] flex flex-col justify-center items-center z-30 pointer-events-none">
             <span className="text-[24px] font-black text-[#F48B29] leading-none tracking-[0.01em]">
               QUICK
@@ -835,7 +835,7 @@ const BlogSkeleton = () => (
   </div>
 );
 
-// ── Error State ───────────────────────────────────────────────────
+
 const BlogError = ({ message }) => (
   <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
     <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center max-w-sm">
